@@ -1,3 +1,18 @@
+/*
+Таблица журнала входов:
+CREATE TABLE LoginLog (
+            Login
+                        varchar(32)
+                        NOT NULL,
+            Moment
+                        datetime2
+                        NOT NULL,
+            CONSTRAINT PK_LoginLog PRIMARY KEY CLUSTERED (Login, Moment)
+);
+
+Выбрать логин (Login) и дату-время (Moment) последнего входа тех, кто заходил больше пяти раз за один день в текущем месяце.
+*/
+
 CREATE DATABASE Test
 GO
 
@@ -28,7 +43,7 @@ INSERT INTO LoginLog (Login, Moment)
 		('Warren Mendez','2020-10-04 00:32:14'),
 		('Asher Willis','2020-10-17 12:59:41'),
 		('Adrian Morrow','2020-10-04 04:02:24'),
-		('Beau Maddox','2020-10-27 08:39:55'),
+		('Fletcher Ingram','2020-10-27 08:39:55'),
 		('Tanner Potter','2020-10-26 15:25:27'),
 		('Isaiah England','2020-10-25 17:57:17'),
 		('Stephen Harmon','2020-10-16 12:53:15'),
@@ -46,10 +61,10 @@ INSERT INTO LoginLog (Login, Moment)
 		('Theodore Vaughn','2020-10-29 05:13:32'),
 		('Emery Nelson','2020-10-18 22:49:22'),
 		('Driscoll Johnston','2020-10-07 02:25:19'),
-		('Leonard Guthrie','2020-10-11 06:06:08'),
+		('Fletcher Ingram','2020-10-11 06:06:08'),
 		('Cedric Conley','2020-10-21 13:58:06'),
 		('Phillip Merritt','2020-10-20 03:09:27'),
-		('Hasad Callahan','2020-10-20 05:09:17'),
+		('Fletcher Ingram','2020-10-20 05:09:17'),
 		('Christopher Collier','2020-10-20 17:42:44'),
 		('Garrison Bowen','2020-10-26 05:52:22'),
 		('Colorado Blanchard','2020-10-23 15:54:51'),
@@ -77,7 +92,7 @@ INSERT INTO LoginLog (Login, Moment)
 		('Mark Decker','2020-10-26 08:02:42'),
 		('George Puckett','2020-10-13 03:14:28'),
 		('Jacob Beck','2020-10-10 06:33:30'),
-		('Geoffrey Chandler','2020-10-10 15:12:19'),
+		('Fletcher Ingram','2020-10-10 15:12:19'),
 		('Chester Casey','2020-10-09 20:00:23'),
 		('Fritz Graves','2020-10-31 23:15:57'),
 		('Nicholas Price','2020-10-21 14:58:44'),
@@ -113,3 +128,11 @@ INSERT INTO LoginLog (Login, Moment)
 		('Judah Nelson','2020-10-25 01:37:36'),
 		('Leroy Hopkins','2020-10-10 23:59:59'),
 		('Carter Pratt','2020-10-29 07:09:33');
+GO
+
+
+SELECT Login, COUNT(Login) FROM LoginLog
+	GROUP BY Login
+	HAVING COUNT(Login) >= 5
+
+DELETE LoginLog
